@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  body{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+  }
+
+  table, td, th {
+    border: 1px solid black;
+  }
+
+  table{
+    text-align:center;
+    border-collapse: collapse;
+  }
+</style>
+<body>
+  <h2>Laporan Transaksi Kegiatan</h2>
+<table class="table table-bordered table-checkable table-search-result">
+  <thead>
+    <tr >
+      <th width="5%">No.</th>
+      <th>Jenis Transaksi</th>
+      <th>Kategori Kegiatan</th>
+      <th>No Kwitansi</th>
+      <th>Nama Warga</th>
+      <th>Jenis Barang</th>
+      <th>Masuk</th>
+      <th>Keluar</th>
+    </tr>
+    <tr>
+        <th>Tanggal</th>
+        <th>Nilai</th>
+        <th>Tanggal</th>
+        <th>Nilai</th>
+    </tr>
+  </thead>
+  <tbody>
+              <tr> 
+            <td>1</td>
+            <td>Masuk</td>
+            <td>Idul Fitri</td>
+            <td>20210906134913/REG/ZTR-FTR/12/2021</td>
+            <td>Angga</td>
+            <td>Uang (Rp)</td>
+            <td>2021-09-06</td>
+            <td class="nilai-masuk">165</td>
+            <td></td>
+            <td class="nilai-keluar"></td>
+        </tr>
+            <tr> 
+            <td>2</td>
+            <td>Keluar</td>
+            <td>Idul Fitri</td>
+            <td>20210909120148/REG/ZTR-FTR/08/2021</td>
+            <td>Ratma</td>
+            <td>Beras (Kg)</td>
+            <td></td>
+            <td class="nilai-masuk"></td>
+            <td>2021-09-09</td>
+            <td class="nilai-keluar">165</td>
+        </tr>
+        </tbody>
+</table>
+</body>
+</html>
+
+<script>
+
+  // sumTotalHandler()
+
+  setTimeout(() => {
+      window.print()
+      window.close()
+  },100)
+
+  function sumTotalHandler(){
+
+    const totalMasuk = document.querySelector('.total-masuk')
+    const totalKeluar = document.querySelector('.total-keluar')
+
+    const sumNilaiMasuk = (selector) => {
+      let arrNilai = [];
+      
+      document.querySelectorAll(selector).forEach(node => {
+        const nilai = parseInt(node.innerText)
+
+        if(nilai > 0){
+          arrNilai = [...arrNilai,nilai]
+        }
+      })
+
+      return arrNilai.reduce((a,b) => {
+                  return a+b
+                  },0)
+    }
+
+    const totalNilaiMasuk = sumNilaiMasuk('.nilai-masuk') ?? 0
+    const totalNilaiKeluar = sumNilaiMasuk('.nilai-keluar') ?? 0
+
+    if(totalMasuk || totalKeluar){
+      totalMasuk.innerText = totalNilaiMasuk
+      totalKeluar.innerText = totalNilaiKeluar
+    }
+  }
+
+</script>
